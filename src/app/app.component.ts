@@ -4,7 +4,15 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styles:[`
+  .container {
+    margin-top: 30px;
+  }
+
+  input.ng-invalid.ng-touched{
+    border: 1px solid red;
+  }
+  `]
 })
 export class AppComponent implements OnInit{
   genders = ['male', 'female'];
