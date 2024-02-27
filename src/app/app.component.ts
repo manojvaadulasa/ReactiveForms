@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit{
     { 'one':'option1','two':'Option1' },
     { 'one':'option2','two':'Option2' },
     { 'one':'option3','two':'Option3' }
-  ]
+  ];
 
   ngOnInit(): void {
     this.signupForm= new FormGroup({
@@ -46,11 +46,17 @@ export class AppComponent implements OnInit{
 
   onSubmit(){
     console.log(this.signupForm.value.gender);
+    for(let i=0;i<(<FormArray>this.signupForm.get('hobbies')).length;i++){
+      console.log((<FormArray>this.signupForm.get('hobbies')).value[i])
+    }
   }
 
   onAddHobby(){
     const control= new FormControl(null, Validators.required);
     (<FormArray>this.signupForm.get('hobbies')).push(control);
+  }
+  onRemoveHobby(index : number){
+    (<FormArray>this.signupForm.get('hobbies')).removeAt(index);
   }
 
   forbiddenNames(control: FormControl): {[s: string]:boolean}{
